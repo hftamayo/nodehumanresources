@@ -1,11 +1,11 @@
 import express from "express";
 const router = express.Router();
 
-router.post("/login", (req, res) => {
+router.post("/api/v1/login", (req, res) => {
     res.json({login: true});
 });
 
-router.post("/register", (req, res) => {
+router.post("/api/v1/register", (req, res) => {
     res.json({register: true});
 });
 
