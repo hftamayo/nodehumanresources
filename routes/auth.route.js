@@ -7,7 +7,10 @@ router.post("/login", login);
 
 router.post(
   "/register",
-  [body("email", "Invalid email format").trim().isEmail().normalizeEmail()],
+  [
+    body("email", "Invalid email format").trim().isEmail().normalizeEmail(),
+    body("password", "Invalid password").trim().isLength({ min: 6 }),
+  ],
   register
 );
 
