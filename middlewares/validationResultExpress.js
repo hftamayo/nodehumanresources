@@ -7,10 +7,5 @@ export const validationResult = (req, res, next) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  console.log(req.body);
-  res.json({ ok: true });
-};
-
-export const login = (req, res) => {
-  res.json({ ok: "login" });
+  next();
 };
