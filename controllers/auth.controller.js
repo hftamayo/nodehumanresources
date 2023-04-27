@@ -8,7 +8,10 @@ export const register = async (req, res) => {
     //jwt token
     return res.json({ register: true });
   } catch (error) {
-    console.log(error);
+    console.log(error.code);
+    if (error.code === 11000) {
+      return res.status(400).json({error: "User already exists"});
+    }
   }
 };
 
