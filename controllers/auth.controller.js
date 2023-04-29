@@ -9,12 +9,13 @@ export const register = async (req, res) => {
     user = new User({ email, password });
     await user.save();
     //jwt token
-    return res.json({ register: true });
+    return res.status(201).json({ register: true });
   } catch (error) {
     console.log(error.code);
     if (error.code === 11000) {
       return res.status(400).json({ error: "User already exists" });
     }
+    return res.status(500).json({ error: "Network Error" });
   }
 };
 
