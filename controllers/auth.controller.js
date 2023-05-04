@@ -11,7 +11,7 @@ export const register = async (req, res) => {
     //jwt token
     return res.status(201).json({ register: true });
   } catch (error) {
-    console.log(error.code);
+    console.log(error);
     if (error.code === 11000) {
       return res.status(400).json({ error: "User already exists" });
     }
@@ -20,5 +20,15 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  res.json({ login: true });
+  try{
+    const {email, password} = req.body;
+    let user = await User.findOne({email});
+    if(!user) throw new Error('User does not exists');
+    return res.json({ login: true });
+
+  }catch (error){
+    console.log(error);
+
+  }
+
 };
