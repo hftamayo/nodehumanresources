@@ -31,9 +31,11 @@ export const login = async (req, res) => {
         .status(403)
         .json({ error: "incorrect credentials, check and retry" });
 
+    //if the validation is successful generate the JWT token
+
     return res.json({ login: true });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: "Server error" });
+    return res.status(500).json({ error: "Unexpected server error" });
   }
 };
