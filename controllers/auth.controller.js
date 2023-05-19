@@ -1,4 +1,5 @@
 import { User } from "../models/User.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   const { email, password } = req.body;
@@ -32,6 +33,7 @@ export const login = async (req, res) => {
         .json({ error: "incorrect credentials, check and retry" });
 
     //if the validation is successful generate the JWT token
+    const token = jwt.sign({uid: user});
 
     return res.json({ login: true });
   } catch (error) {
