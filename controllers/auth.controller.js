@@ -24,6 +24,13 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
     if (!user) return res.status(403).json({ error: "incorrect credentials" });
+
+    const evaluatingPassword = await user.comparePassword(password);
+    if (!evaluatingPassword)
+      return res
+        .status(403)
+        .json({ error: "incorrect credentials, check and retry" });
+
     return res.json({ login: true });
   } catch (error) {
     console.log(error);
