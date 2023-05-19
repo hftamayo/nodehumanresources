@@ -20,15 +20,13 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res) => {
-  try{
-    const {email, password} = req.body;
-    let user = await User.findOne({email});
-    if(!user) throw new Error('User does not exists');
+  try {
+    const { email, password } = req.body;
+    let user = await User.findOne({ email });
+    if (!user) return res.status(403).json({ error: "incorrect credentials" });
     return res.json({ login: true });
-
-  }catch (error){
+  } catch (error) {
     console.log(error);
-
+    return res.status(500).json({ error: "Server error" });
   }
-
 };
