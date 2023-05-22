@@ -33,9 +33,9 @@ export const login = async (req, res) => {
         .json({ error: "incorrect credentials, check and retry" });
 
     //if the validation is successful generate the JWT token
-    const token = jwt.sign({uid: user});
+    const token = jwt.sign({uid: user._id}, process.env.JWT_SECRET);
 
-    return res.json({ login: true });
+    return res.json({ token });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Unexpected server error" });
