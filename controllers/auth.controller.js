@@ -37,9 +37,13 @@ export const login = async (req, res) => {
     // const token = jwt.sign({uid: user._id}, process.env.JWT_SECRET);
     const { token, expiresIn } = generateToken(user.id);
 
-    return res.json({token, expiresIn});
+    return res.json({ token, expiresIn });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Unexpected server error" });
   }
+};
+
+export const infoUser = async (req, res) => {
+  res.json({ user: "correo@correo.com" });
 };
