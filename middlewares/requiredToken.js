@@ -1,7 +1,9 @@
 export const requiredToken = (req, res, next) => {
   try {
     const token = req.headers?.authorization;
-    if (!token) throw new Error("Error in token access (Bearer blocker)");
+    if (!token) {
+      throw new Error("Error in token access (Bearer blocker)");
+    }
     next();
   } catch (error) {
     console.log(error);
