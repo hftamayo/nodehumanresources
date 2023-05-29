@@ -2,6 +2,7 @@ import { Router } from "express";
 import { infoUser, login, register } from "../controllers/auth.controller.js";
 import { body } from "express-validator";
 import { validationResultExpress } from "../middlewares/validationResultExpress.js";
+import { requiredToken } from "../middlewares/requiredToken.js";
 const router = Router();
 
 router.post(
@@ -35,6 +36,6 @@ router.post(
   login
 );
 
-router.get("/protected", infoUser);
+router.get("/protected", requiredToken ,infoUser);
 
 export default router;
